@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>Page Protégée</title>
     <style>
         /* Masque le contenu de la page jusqu'à ce que le bon mot de passe soit saisi */
@@ -12,7 +14,7 @@
     </style>
     <script>
         // Le mot de passe correct
-        const correctPassword = "monMotDePasse";
+        const correctPassword = "Cookie";
 
         // Demande le mot de passe à l'utilisateur
         function askPassword() {
@@ -23,7 +25,7 @@
             } else {
                 // Redirige vers une autre page ou affiche un message d'erreur
                 alert("Mot de passe incorrect. Vous ne pouvez pas accéder au site.");
-                window.location.href = "https://www.example.com"; // redirige vers un autre site
+                window.location.href = "http://127.0.0.1:5501/index.html"; // redirige vers un autre site  https://amsi91.github.io
             }
         }
 
@@ -31,11 +33,32 @@
         window.onload = askPassword;
     </script>
 </head>
+
 <body>
     <div id="content">
-        <h1>Bienvenue sur le site protégé</h1>
-        <p>Voici le contenu protégé par mot de passe.</p>
+        <h1>BRAVO TU AS REUSSI A HACKER MON SITE SECRET !!!!</h1>
+        <h2>Chère Sara,</h2>
+        <br>
+        <h4>Merci pour ta lettre qui m’a éclairé de cette pause inattendue m’a laissé perplexe et inquiet. Je comprends
+        que tu traverses une période difficile et que tu as besoin de temps pour te retrouver. Je respecte ta
+        décision et je suis prêt à te donner le temps dont tu as besoin.</h4>
+        <br>
+        <h4>Je tiens cependant à te dire que je t’aime profondément et que je veux faire ma vie avec toi. Notre amour et nos
+        projets de mariage sont très importants pour moi, et je crois fermement que nous pouvons surmonter cette période
+        ensemble. Tu es la personne avec qui je veux partager mon avenir, et je suis prêt à te soutenir dans ta quête de
+        mieux-être.</h4>
+        <br>
+        <h4>Je suis ici pour toi, prêt à attendre et à te donner le temps nécessaire. Mais sache que mon engagement envers
+        toi reste intact et que je souhaite que nous construisions notre vie ensemble, main dans la main.</h4>
+        <br>
+        <h4>Je t’aime, et j’ai hâte de retrouver notre bonheur et de continuer à bâtir notre avenir commun.</h4>
+        <br>
+        <h4>PS : J’espère que ce petit cadeau t’accompagnera durant cette lecture</h4>
+        <br>
+        <h4>Ton partner in the crime,</h4>
+        <h4>Amara</h4>
         <!-- Ton contenu protégé ici -->
     </div>
 </body>
+
 </html>

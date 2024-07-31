@@ -1,0 +1,14 @@
+body {
+    /* Ajoute un fond d'écran */
+    background-image: url('IMG_4851.jpeg');
+    background-size: cover; /* Ajuste l'image pour couvrir tout l'écran */
+    background-repeat: no-repeat; /* Empêche la répétition de l'image */
+    background-attachment: fixed; /* Fixe l'image lors du défilement */
+    background-position: center; /* Centre l'image de fond */
+}
+
+/* Masque le contenu de la page jusqu'à ce que le bon mot de passe soit saisi */
+#content {
+    display: none;
+    color: white; /* Optionnel: change la couleur du texte pour le rendre lisible sur le fond */
+}
