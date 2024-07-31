@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Protégée</title>
+    <style>
+        /* Masque le contenu de la page jusqu'à ce que le bon mot de passe soit saisi */
+        #content {
+            display: none;
+        }
+    </style>
+    <script>
+        // Le mot de passe correct
+        const correctPassword = "monMotDePasse";
+
+        // Demande le mot de passe à l'utilisateur
+        function askPassword() {
+            let userPassword = prompt("Entrez le mot de passe pour accéder au site:");
+            if (userPassword === correctPassword) {
+                // Affiche le contenu si le mot de passe est correct
+                document.getElementById('content').style.display = 'block';
+            } else {
+                // Redirige vers une autre page ou affiche un message d'erreur
+                alert("Mot de passe incorrect. Vous ne pouvez pas accéder au site.");
+                window.location.href = "https://www.example.com"; // redirige vers un autre site
+            }
+        }
+
+        // Appelle la fonction pour demander le mot de passe lorsque la page est chargée
+        window.onload = askPassword;
+    </script>
+</head>
+<body>
+    <div id="content">
+        <h1>Bienvenue sur le site protégé</h1>
+        <p>Voici le contenu protégé par mot de passe.</p>
+        <!-- Ton contenu protégé ici -->
+    </div>
+</body>
+</html>
