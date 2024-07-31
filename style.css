@@ -1,6 +1,6 @@
 body {
     /* Ajoute un fond d'écran */
-    background-image: url('IMG_4851.jpeg');
+    background-image: url('IMG_4852.jpeg');
     background-size: cover; /* Ajuste l'image pour couvrir tout l'écran */
     background-repeat: no-repeat; /* Empêche la répétition de l'image */
     background-attachment: fixed; /* Fixe l'image lors du défilement */
@@ -10,5 +10,9 @@ body {
 /* Masque le contenu de la page jusqu'à ce que le bon mot de passe soit saisi */
 #content {
     display: none;
-    color: white; /* Optionnel: change la couleur du texte pour le rendre lisible sur le fond */
+    color: rgb(0, 0, 0); /* Optionnel: change la couleur du texte pour le rendre lisible sur le fond */
+}
+
+h4 {
+    background-color: aliceblue;
 }
