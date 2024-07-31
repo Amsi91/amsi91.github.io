@@ -18,13 +18,13 @@
 
         // Demande le mot de passe à l'utilisateur
         function askPassword() {
-            let userPassword = prompt("Entrez le mot de passe pour accéder au site:");
+            let userPassword = prompt("Entrez le mot de passe pour accéder au site secret top defense d'Amara :");
             if (userPassword === correctPassword) {
                 // Affiche le contenu si le mot de passe est correct
                 document.getElementById('content').style.display = 'block';
             } else {
                 // Redirige vers une autre page ou affiche un message d'erreur
-                alert("Mot de passe incorrect. Vous ne pouvez pas accéder au site.");
+                alert("Nan t'as pas trouvé le mot de passe ? Même pas un peu... Vas-y réessaye");
                 window.location.href = "https://amsi91.github.io"; // redirige vers un autre site  
             }
         }
