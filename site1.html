@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pour Sara ♥</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@900&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&family=Bebas+Neue&display=swap');
+
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+    body {
+      width:100vw; height:100vh;
+      overflow:hidden; background:#000;
+      cursor: crosshair;
+    }
+
+    /* ── Album photo en iframe derrière ── */
+    #behind {
+      position:fixed; inset:0;
+      width:100%; height:100%;
+      border:none; z-index:0;
+      pointer-events:none;
+    }
+
+    /* ── Vitrine = la lettre ── */
+    #vitrine {
+      position:fixed; inset:0; z-index:10;
+    }
+
+    #gc {
+      position:absolute; inset:0;
+      width:100%; height:100%;
+      display:block; pointer-events:none;
+    }
+
+    #sv {
+      position:absolute; inset:0;
+      width:100%; height:100%;
+      pointer-events:none; overflow:visible;
+    }
+
+    /* ── Contenu de la vitrine = la lettre ── */
+    #vt {
+      position:absolute; inset:0;
+      overflow-y:auto;
+      transition: opacity .7s ease, filter .7s ease;
+    }
+
+    /* Background de la vitrine : rose sombre */
+    .letter-bg {
+      min-height:100%;
+      background: radial-gradient(ellipse at 30% 20%, #2a0a1a 0%, #12020a 55%, #0d0010 100%);
+      display:flex; flex-direction:column; align-items:center;
+      padding: 0 0 4rem;
+    }
+
+    /* Nav */
+    .l-nav {
+      width:100%; display:flex;
+      justify-content:space-between; align-items:center;
+      padding:1.5rem 4rem;
+      border-bottom:1px solid rgba(255,80,140,.12);
+      background:rgba(18,2,10,.85);
+      backdrop-filter:blur(8px);
+      position:sticky; top:0; z-index:5;
+    }
+    .l-logo {
+      font-family:'Cinzel Decorative',serif;
+      font-size:1.2rem; color:#ff8fab;
+      text-shadow:0 0 18px rgba(255,143,171,.5);
+    }
+    .l-hint {
+      font-family:'DM Sans',sans-serif;
+      font-size:.65rem; letter-spacing:.35em;
+      text-transform:uppercase; color:rgba(255,150,190,.4);
+      animation: hintPulse 2s ease-in-out infinite;
+    }
+    @keyframes hintPulse { 0%,100%{opacity:.4} 50%{opacity:.9} }
+
+    /* Hero */
+    .l-hero {
+      position:relative; width:100%;
+      display:flex; flex-direction:column;
+      align-items:center; padding:5rem 2rem 3rem;
+      overflow:hidden;
+    }
+
+    .l-glow {
+      position:absolute; border-radius:50%;
+      pointer-events:none; filter:blur(90px);
+    }
+    .l-glow.g1 {
+      width:500px; height:500px;
+      background:radial-gradient(circle,rgba(255,79,139,.14),transparent 70%);
+      top:-120px; left:-100px;
+      animation:glowPulse 7s ease-in-out infinite;
+    }
+    .l-glow.g2 {
+      width:400px; height:400px;
+      background:radial-gradient(circle,rgba(192,0,74,.11),transparent 70%);
+      bottom:-80px; right:-80px;
+      animation:glowPulse 7s ease-in-out infinite reverse;
+    }
+    @keyframes glowPulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.7;transform:scale(1.15)} }
+
+    /* Grand cœur SVG */
+    .big-heart {
+      position:relative; z-index:1;
+      width:clamp(100px,18vw,160px);
+      margin-bottom:2rem;
+      animation:heartbeat 1.4s ease-in-out infinite;
+      filter:drop-shadow(0 0 30px rgba(255,79,139,.7));
+    }
+    @keyframes heartbeat {
+      0%,100%{transform:scale(1)}
+      14%{transform:scale(1.1)}
+      28%{transform:scale(1)}
+      42%{transform:scale(1.06)}
+    }
+
+    .l-eyebrow {
+      font-family:'DM Sans',sans-serif;
+      font-size:.68rem; letter-spacing:.45em;
+      text-transform:uppercase; color:#ff4f8b;
+      margin-bottom:1.2rem; position:relative; z-index:1;
+    }
+
+    .l-title {
+      font-family:'Bebas Neue',sans-serif;
+      font-size:clamp(2.5rem,7vw,6rem);
+      line-height:1; color:#fff;
+      text-shadow:0 0 50px rgba(255,79,139,.25);
+      margin-bottom:.6rem;
+      position:relative; z-index:1;
+      text-align:center;
+    }
+    .l-title span {
+      color:#ff6fa3;
+      text-shadow:0 0 35px rgba(255,111,163,.55);
+    }
+
+    /* Lettre */
+    .l-letter {
+      position:relative; z-index:1;
+      max-width:680px; width:100%;
+      margin:0 auto;
+      padding:0 2rem;
+    }
+
+    .l-opening {
+      font-family:'Playfair Display',serif;
+      font-style:italic; font-size:1.3rem;
+      color:#ff8fab; margin-bottom:2rem;
+    }
+
+    .l-letter p {
+      font-family:'DM Sans',sans-serif;
+      font-weight:300; font-size:1rem;
+      line-height:1.88; color:rgba(255,215,230,.85);
+      border-left:2px solid rgba(255,80,140,.22);
+      padding-left:1.4rem;
+      margin-bottom:1.4rem;
+    }
+
+    .l-ps {
+      font-style:italic;
+      color:rgba(255,180,210,.55) !important;
+      font-size:.9rem !important;
+    }
+
+    .l-sign {
+      font-family:'Cinzel Decorative',serif !important;
+      font-size:1.05rem !important;
+      color:#ff8fab !important;
+      border-left:none !important;
+      padding-left:0 !important;
+      text-shadow:0 0 18px rgba(255,143,171,.4);
+      line-height:1.7 !important;
+      margin-top:.5rem;
+    }
+
+    /* CTA "tape pour découvrir" */
+    .l-cta {
+      margin-top:3rem; text-align:center;
+      position:relative; z-index:1;
+    }
+    .l-cta p {
+      border:none !important; padding:0 !important;
+      font-size:.7rem !important; letter-spacing:.35em !important;
+      text-transform:uppercase;
+      color:rgba(255,150,190,.5) !important;
+      animation: hintPulse 2s ease-in-out infinite;
+    }
+
+    /* Compteur */
+    #ctr {
+      position:fixed; bottom:1.5rem; right:2rem;
+      z-index:200; font-family:'Bebas Neue',sans-serif;
+      font-size:.95rem; letter-spacing:.3em;
+      color:rgba(255,255,255,.18);
+      pointer-events:none; transition:color .4s,opacity .6s;
+    }
+
+    /* Flash */
+    #fl {
+      position:fixed; inset:0; z-index:999;
+      background:#fff; opacity:0; pointer-events:none;
+    }
+
+    /* Particules */
+    @keyframes dash      { to{ stroke-dashoffset:0; } }
+    @keyframes shFly     { 0%{transform:translate(0,0) rotate(0deg);opacity:.85} 100%{transform:translate(var(--x),var(--y)) rotate(var(--r));opacity:0} }
+    @keyframes rngOut    { to{transform:translate(-50%,-50%) scale(1);opacity:0;width:200px;height:200px} }
+    @keyframes heartFloat{ 0%{transform:translateY(0) rotate(var(--rot,0deg)) scale(0);opacity:.9} 20%{opacity:.95;transform:translateY(-30px) rotate(var(--rot,0deg)) scale(1)} 100%{transform:translateY(-200px) rotate(calc(var(--rot,0deg)+20deg)) scale(.3);opacity:0} }
+  </style>
+</head>
+<body>
+
+  <!-- Album photo en arrière-plan (visible à travers les trous) -->
+  <iframe id="behind" src="site2.html"></iframe>
+
+  <!-- Vitrine = la lettre d'Amara -->
+  <div id="vitrine">
+    <canvas id="gc"></canvas>
+    <svg id="sv" viewBox="0 0 1000 600" preserveAspectRatio="none"></svg>
+
+    <div id="vt">
+      <div class="letter-bg">
+
+        <nav class="l-nav">
+          <div class="l-logo">♥ Pour Sara</div>
+          <p class="l-hint">Tape partout pour révéler la surprise ✨</p>
+        </nav>
+
+        <div class="l-hero">
+          <div class="l-glow g1"></div>
+          <div class="l-glow g2"></div>
+
+          <!-- Cœur SVG animé -->
+          <svg class="big-heart" viewBox="0 0 200 180" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <radialGradient id="hg" cx="50%" cy="40%">
+                <stop offset="0%"   stop-color="#ff8fab"/>
+                <stop offset="60%"  stop-color="#e0004f"/>
+                <stop offset="100%" stop-color="#8b0030"/>
+              </radialGradient>
+            </defs>
+            <path d="M100,155 C100,155 20,100 20,55 C20,30 40,15 60,15 C75,15 90,25 100,38 C110,25 125,15 140,15 C160,15 180,30 180,55 C180,100 100,155 100,155Z" fill="url(#hg)"/>
+          </svg>
+
+          <p class="l-eyebrow">Chère Sara,</p>
+          <h1 class="l-title">BRAVO TU AS<br><span>RÉUSSI À HACKER</span><br>MON SITE !!!!</h1>
+        </div>
+
+        <!-- La lettre -->
+        <div class="l-letter">
+          <p class="l-opening">Mon amour,</p>
+          <p>Merci pour ta lettre qui m'a éclairé, cette pause inattendue m'a laissé perplexe et inquiet. Je comprends que tu traverses une période difficile et que tu as besoin de temps pour te retrouver. Je respecte ta décision et je suis prêt à te donner le temps dont tu as besoin.</p>
+          <p>Je tiens cependant à te dire que je t'aime profondément et que je veux faire ma vie avec toi. Notre amour et nos projets de mariage sont très importants pour moi, et je crois fermement que nous pouvons surmonter cette période ensemble. Tu es la personne avec qui je veux partager mon avenir, et je suis prêt à te soutenir dans ta quête de mieux-être.</p>
+          <p>Je suis ici pour toi, prêt à attendre et à te donner le temps nécessaire. Mais sache que mon engagement envers toi reste intact et que je souhaite que nous construisions notre vie ensemble, main dans la main.</p>
+          <p>Je t'aime, et j'ai hâte de retrouver notre bonheur et de continuer à bâtir notre avenir commun.</p>
+          <p class="l-ps">PS : J'espère que ce petit cadeau t'accompagnera durant cette lecture 🎁</p>
+          <p class="l-sign">Ton partner in the crime,<br><strong>Amara</strong> ♥</p>
+
+          <div class="l-cta">
+            <p>✨ Tape sur la page pour révéler la surprise ✨</p>
+          </div>
+        </div>
+
+      </div>
+    </div><!-- fin #vt -->
+  </div><!-- fin #vitrine -->
+
+  <div id="fl"></div>
+  <div id="ctr">♥ 0 / 7</div>
+
+<script>
+"use strict";
+
+var MAX   = 7;
+var n     = 0;
+var done  = false;
+
+var vitrine = document.getElementById('vitrine');
+var gc      = document.getElementById('gc');
+var sv      = document.getElementById('sv');
+var vt      = document.getElementById('vt');
+var fl      = document.getElementById('fl');
+var ctr     = document.getElementById('ctr');
+var ctx     = gc.getContext('2d');
+var holes   = [];
+
+function resize(){
+  gc.width  = window.innerWidth;
+  gc.height = window.innerHeight;
+  draw();
+}
+window.addEventListener('resize', resize);
+resize();
+
+function draw(){
+  var W = gc.width, H = gc.height;
+  ctx.clearRect(0,0,W,H);
+  ctx.fillStyle = 'rgba(18,5,10,'+(1-(n/MAX)*.15)+')';
+  ctx.fillRect(0,0,W,H);
+  ctx.globalCompositeOperation = 'destination-out';
+  holes.forEach(function(h){
+    var g = ctx.createRadialGradient(h.x,h.y,0,h.x,h.y,h.r);
+    g.addColorStop(0,    'rgba(0,0,0,1)');
+    g.addColorStop(0.55, 'rgba(0,0,0,.88)');
+    g.addColorStop(1,    'rgba(0,0,0,0)');
+    ctx.beginPath();
+    ctx.arc(h.x,h.y,h.r,0,Math.PI*2);
+    ctx.fillStyle = g; ctx.fill();
+  });
+  ctx.globalCompositeOperation = 'source-over';
+}
+
+function R(a,b){ return Math.random()*(b-a)+a; }
+
+function crack(mx,my){
+  var W=window.innerWidth, H=window.innerHeight;
+  var sx=(mx/W)*1000, sy=(my/H)*600;
+  function branch(x,y,ang,len,d){
+    if(d>3||len<5) return;
+    var pts=['M'+x+','+y], cx=x, cy=y, a=ang;
+    var segs=Math.floor(R(3,7));
+    for(var i=0;i<segs;i++){
+      a+=R(-35,35); var s=len/segs;
+      cx+=Math.cos(a*Math.PI/180)*s;
+      cy+=Math.sin(a*Math.PI/180)*s;
+      pts.push('L'+cx+','+cy);
+    }
+    var pd=pts.join(''), dl=pd.length*8, op=Math.max(.2,1-d*.25);
+    var glow=document.createElementNS('http://www.w3.org/2000/svg','path');
+    glow.setAttribute('d',pd); glow.setAttribute('stroke','rgba(255,130,180,.3)');
+    glow.setAttribute('stroke-width','9'); glow.setAttribute('fill','none');
+    glow.style.opacity=op; sv.appendChild(glow);
+    var line=document.createElementNS('http://www.w3.org/2000/svg','path');
+    line.setAttribute('d',pd);
+    line.setAttribute('stroke',d%2===0?'#ffffff':'#ff6fa3');
+    line.setAttribute('stroke-width','1.5'); line.setAttribute('fill','none');
+    line.style.filter='drop-shadow(0 0 5px rgba(255,100,160,1)) drop-shadow(0 0 12px rgba(255,180,210,.6))';
+    line.style.opacity=op;
+    line.style.strokeDasharray=dl; line.style.strokeDashoffset=dl;
+    line.style.animation='dash .38s ease-out '+R(0,.08).toFixed(2)+'s forwards';
+    sv.appendChild(line);
+    var nb=d<2?Math.floor(R(2,4)):Math.floor(R(1,3));
+    for(var j=0;j<nb;j++){
+      var frac=R(.3,.85);
+      branch(x+(cx-x)*frac+R(-8,8),y+(cy-y)*frac+R(-8,8),a+R(-70,70),len*R(.35,.65),d+1);
+    }
+  }
+  var roots=Math.min(3+n,9), initLen=R(80,180)*(1+n*.25);
+  for(var i=0;i<roots;i++) branch(sx,sy,(360/roots)*i+R(-25,25),initLen,0);
+}
+
+function hearts(x,y){
+  var em=['♥','❤','💕','💗','💖','💝','🌹'];
+  for(var i=0,nb=2+n;i<nb;i++){
+    var el=document.createElement('div');
+    el.style.cssText='position:fixed;pointer-events:none;z-index:400;opacity:0;'+
+      'left:'+(x+R(-40,40))+'px;top:'+(y+R(-20,20))+'px;'+
+      'font-size:'+R(.9,2.2)+'rem;--rot:'+R(-30,30)+'deg;'+
+      'animation:heartFloat '+R(1.5,3)+'s ease-out '+R(0,.15)+'s forwards;';
+    el.textContent=em[Math.floor(Math.random()*em.length)];
+    document.body.appendChild(el);
+    (function(node){setTimeout(function(){node.remove();},3500);})(el);
+  }
+}
+
+function shards(x,y){
+  for(var i=0,nb=5+n*2;i<nb;i++){
+    var el=document.createElement('div');
+    var sz=R(8,35+n*4), ang=R(0,360), dist=R(50,180+n*20);
+    var dx=Math.cos(ang*Math.PI/180)*dist, dy=Math.sin(ang*Math.PI/180)*dist+R(10,80);
+    el.style.cssText='position:fixed;pointer-events:none;z-index:300;'+
+      'left:'+x+'px;top:'+y+'px;width:'+sz+'px;height:'+(sz*R(.5,1.8))+'px;'+
+      'background:linear-gradient('+R(0,360)+'deg,rgba(255,120,170,.85),rgba(255,255,255,.75));'+
+      'clip-path:polygon('+R(0,30)+'% '+R(0,25)+'%,'+R(65,100)+'% '+R(0,30)+'%,'+R(80,100)+'% '+R(65,100)+'%,'+R(0,25)+'% '+R(75,100)+'%);'+
+      'animation:shFly '+R(.7,1.5)+'s ease-in forwards;'+
+      '--x:'+dx+'px;--y:'+dy+'px;--r:'+R(-360,360)+'deg;';
+    document.body.appendChild(el);
+    (function(node){setTimeout(function(){node.remove();},1700);})(el);
+  }
+}
+
+function ring(x,y){
+  [0,130].forEach(function(delay){
+    var r=document.createElement('div');
+    r.style.cssText='position:fixed;border-radius:50%;z-index:300;pointer-events:none;'+
+      'border:1.5px solid rgba(255,120,180,.85);'+
+      'left:'+x+'px;top:'+y+'px;width:0;height:0;'+
+      'transform:translate(-50%,-50%) scale(0);'+
+      'animation:rngOut .55s ease-out '+delay+'ms forwards;';
+    document.body.appendChild(r);
+    (function(node){setTimeout(function(){node.remove();},800+delay);})(r);
+  });
+}
+
+function shake(){
+  var body=document.body, t=0;
+  var iv=setInterval(function(){
+    t+=16; var amp=(1-t/380)*(3+n*1.5);
+    body.style.transform='translate('+R(-amp,amp)+'px,'+R(-amp,amp)+'px)';
+    if(t>380){clearInterval(iv);body.style.transform='';}
+  },16);
+}
+
+function updateCtr(){
+  ctr.textContent='♥ '+n+' / '+MAX;
+  var p=n/MAX;
+  ctr.style.color='rgba('+(255*p|0)+','+(60*(1-p)|0)+',100,'+(0.3+p*.65)+')';
+}
+
+function finalBreak(){
+  done=true;
+  fl.style.transition='opacity 0s'; fl.style.opacity='1';
+  setTimeout(function(){fl.style.transition='opacity .8s ease';fl.style.opacity='0';},90);
+  var cx=window.innerWidth/2, cy=window.innerHeight/2;
+  for(var i=0;i<8;i++){
+    (function(i){setTimeout(function(){
+      shards(cx+R(-150,150),cy+R(-100,100));
+      hearts(cx+R(-60,60),cy+R(-40,40));
+    },i*55);})(i);
+  }
+  vt.style.opacity='0'; vt.style.filter='blur(20px)';
+  setTimeout(function(){
+    vitrine.style.transition='opacity 1.3s ease';
+    vitrine.style.opacity='0';
+  },250);
+  setTimeout(function(){
+    vitrine.style.display='none';
+    ctr.style.opacity='0';
+    document.getElementById('behind').style.pointerEvents='all';
+  },1700);
+}
+
+document.addEventListener('click', function(e){
+  if(done) return;
+  n++;
+  var x=e.clientX, y=e.clientY;
+  holes.push({x:x,y:y,r:45+n*22});
+  draw(); crack(x,y); shards(x,y); hearts(x,y); ring(x,y); shake();
+  var p=n/MAX;
+  vt.style.opacity=''+(1-p*.55);
+  vt.style.filter='blur('+(p*2.5)+'px)';
+  updateCtr();
+  if(navigator.vibrate) navigator.vibrate(15+n*12);
+  if(n>=MAX) setTimeout(finalBreak,180);
+});
+</script>
+</body>
+</html>
